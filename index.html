@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sidebar</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/d85c61bcbf.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <main class="main">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <button ><svg width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="1"></rect><rect x="2" y="9" width="16" height="1"></rect><rect x="2" y="14" width="16" height="1"></rect></svg></button>
+            </div>
+        </div>
+        <div class="section">
+            
+            <div class="platform">
+                <span>Click to Start</span>
+            </div>
+        </div>
+        <!-- start sidebar -->
+        <div class="sidebar">
+            <div class="top_navbar1">
+                <div class="hamburger1">
+                    <button ><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="menu" >
+                <!-- start search -->
+                <form class="search ">
+                    <input type="search" placeholder="Search" > 
+                    <button><svg width="20" height="20" viewBox="0 0 20 20"><circle fill="none" stroke="" stroke-width="3" cx="9" cy="9" r="7"></circle><path fill="none" stroke="" stroke-width="3" d="M14,14 L25,25 L16,16 Z"></path></svg></button>
+                </form>
+                <!-- end search -->
+
+                <!-- start tags -->
+                <div class="tags" id="tags">
+                    <div class="title">
+                        <span>Tags</span>
+                        <div class="number-close">
+                            <span class="number">1</span>
+                            <span id="angle-down" class="close-tags " onclick="openmenu()"><i class="fa-solid fa-angle-down"></i></span>
+                            <span id="angle-up" class="close-tags angle-up" onclick="closemenu()"><i class="fa-solid fa-angle-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="hash-tag">
+                        <p>Hash Tag</p>
+                        <div class="content-tag">
+                            <ul>
+                                <li><a href="#">javascript <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">Tag Goes Here <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">javascript <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">html <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">css <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">javascript <i class="fa-solid fa-xmark"></i></a></li>
+                                <li><a href="#">Tag <i class="fa-solid fa-xmark"></i></a></li>
+                                <span class="plus-tag">+</span>
+                            </ul>
+                            
+                        </div>
+                        <button class="filter">ADD FILTER</button>
+                    </div>
+                </div>
+                <!-- end tags -->
+
+                <!-- start menu-list -->
+                <ul class="menu-list">
+                    <li><a href="#"><span>Form Stuff</span><i class="fa-solid fa-angle-right"></i></a>
+                        <ul class="dropright">
+                            <li><span class="image "><img src="img/Aurora.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Crunch.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Drongo.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Greystone.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Kallari.png" alt=""></span></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>Portlets</span><i class="fa-solid fa-angle-right"></i></a>
+                        <ul class="dropright">
+                            <li><span class="image "><img src="img/Aurora.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Crunch.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Drongo.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Greystone.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Kallari.png" alt=""></span></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>Page Layouts</span><i class="fa-solid fa-angle-right"></i></a>
+                        <ul class="dropright">
+                            <li><span class="image "><img src="img/Aurora.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Crunch.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Drongo.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Greystone.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Kallari.png" alt=""></span></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>Custom Layouts</span><i class="fa-solid fa-angle-right"></i></a>
+                        <ul class="dropright">
+                            <li><span class="image "><img src="img/Aurora.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Crunch.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Drongo.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Greystone.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Kallari.png" alt=""></span></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span>eCommerce</span><i class="fa-solid fa-angle-right"></i></a>
+                        <ul class="dropright">
+                            <li><span class="image "><img src="img/Aurora.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Crunch.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Drongo.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Greystone.png" alt=""></span></li>
+                            <li><span class="image "><img src="img/Kallari.png" alt=""></span></li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- end menu-list -->
+            </div>
+            
+        </div>
+        <!-- end sidebar -->
+    </main>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

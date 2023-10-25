@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/d85c61bcbf.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900;1000&family=Roboto:wght@100;300;400;500;700;900&display=swap"
+        rel="stylesheet">
+
+    <script type="text/javascript" src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script type="text/javascript" src="js/webRtcPlayer.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+    <link rel="stylesheet" href="css/palyer.css">
+    <style>
+        .tag_des {
+            background-color: gray !important;
+            color: red !important;
+        }
+
+        #lamine1:checked~.lam {
+            display: none !important;
+        }
+
+        #playButton {
+
+            display: inline-block;
+            height: auto;
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+
+
+        }
+
+        #playButton:hover {
+
+            transform: scale(1.4);
+
+
+        }
+
+        .textDisplayState {
+            color: white;
+            font-size: 25px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body onload="load()">
+    <main class="main">
+        <div class="top_navbar">
+            <div class="hamburger">
+                <button><svg width="20" height="20" viewBox="0 0 20 20">
+                        <rect x="2" y="4" width="16" height="1"></rect>
+                        <rect x="2" y="9" width="16" height="1"></rect>
+                        <rect x="2" y="14" width="16" height="1"></rect>
+                    </svg></button>
+            </div>
+        </div>
+        <div class="section">
+
+
+            <div id="playerUI" class="platform">
+                <div id="player"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display :grid;  place-items:center ; ">
+
+
+
+
+                </div>
+
+                <div id="overlay" class="overlay text-light bg-dark" style="display: none;">
+                    <div>
+                        <div id="qualityStatus" class="greyStatus">&#9679</div>
+                        <div id="overlayButton">+</div>
+                    </div>
+                    <div id="overlaySettings">
+                        <div id="kickOthers">
+                            <div class="settings-text">Kick all other players</div>
+                            <label class="btn-overlay">
+                                <input type="button" id="kick-other-players-button" class="overlay-button btn-flat"
+                                    value="Kick">
+                            </label>
+                        </div>
+                        <div id="fillWindow">
+                            <div class="settings-text">Enlarge Display to Fill Window</div>
+                            <label class="tgl-switch">
+                                <input type="checkbox" id="enlarge-display-to-fill-window-tgl" class="tgl tgl-flat"
+                                    checked>
+                                <div class="tgl-slider"></div>
+                            </label>
+                        </div>
+                        <div id="qualityControlOwnership">
+                            <div class="settings-text">Quality control ownership</div>
+                            <label class="tgl-switch">
+                                <input type="checkbox" id="quality-control-ownership-tgl" class="tgl tgl-flat">
+                                <div class="tgl-slider"></div>
+                            </label>
+                        </div>
+                        <br>
+
+                        <section id="encoderSettings">
+                            <div class="settings-text">Encoder Settings</div>
+                            <div id="encoderParamsContainer" class="collapse">
+                                <div class="form-group">
+                                    <label for="encoder-rate-control" class="settings-text">Rate Control</label>
+                                    <select id="encoder-rate-control">
+                                        <option value="CBR" selected>CBR</option>
+                                        <option value="VBR">VBR</option>
+                                        <option value="ConstQP">ConstQP</option>
+                                    </select>
+                                    <label for="encoder-target-bitrate-text">Target Bitrate (kbps)</label>
+                                    <input type="number" class="form-control" id="encoder-target-bitrate-text" value="0"
+                                        min="0" max="100000" />
+                                    <label for="encoder-max-bitrate-text">Max Bitrate (kbps)</label>
+                                    <input type="number" class="form-control" id="encoder-max-bitrate-text" value="0"
+                                        min="0" max="100000" />
+                                    <label for="encoder-min-qp-text">Min QP</label>
+                                    <input type="number" class="form-control" id="encoder-min-qp-text" value="0" min="0"
+                                        max="999" />
+                                    <label for="encoder-max-qp-text">Max QP</label>
+                                    <input type="number" class="form-control" id="encoder-max-qp-text" value="0" min="0"
+                                        max="999" />
+                                    <label for="encoder-multipass" class="settings-text">Multipass</label>
+                                    <select id="encoder-multipass">
+                                        <option value="DISABLED" selected>DISABLED</option>
+                                        <option value="QUARTER">QUARTER</option>
+                                        <option value="FULL">FULL</option>
+                                    </select>
+                                    <div class="settings-text">Filler Data</div>
+                                    <label class="tgl-switch">
+                                        <input type="checkbox" id="encoder-filler-data-tgl" class="tgl tgl-flat">
+                                        <div class="tgl-slider"></div>
+                                    </label>
+                                </div>
+                                <input id="encoder-params-submit" class="btn btn-primary btn-lg mt-3" type="button"
+                                    value="Apply">
+                            </div>
+                            <br>
+                        </section>
+
+                        <section id="webRTCSettings">
+                            <div class="settings-text">WebRTC Settings</div>
+                            <div id="webrtcParamsContainer" class="collapse">
+                                <div class="form-group">
+                                    <label for="webrtc-degradation-pref">Degradation Pref</label>
+                                    <select id="webrtc-degradation-pref">
+                                        <option value="BALANCED">BALANCED</option>
+                                        <option value="MAINTAIN_FRAMERATE">MAINTAIN_FRAMERATE</option>
+                                        <option value="MAINTAIN_RESOLUTION">MAINTAIN_RESOLUTION</option>
+                                    </select>
+                                    <label for="webrtc-max-fps-text">Max FPS</label>
+                                    <input type="number" class="form-control" id="webrtc-max-fps-text" value="1" min="1"
+                                        max="999" />
+                                    <label for="webrtc-min-bitrate-text">Min Bitrate (kbps)</label>
+                                    <input type="number" class="form-control" id="webrtc-min-bitrate-text" value="0"
+                                        min="0" max="100000" />
+                                    <label for="webrtc-max-bitrate-text">Max Bitrate (kbps)</label>
+                                    <input type="number" class="form-control" id="webrtc-max-bitrate-text" value="0"
+                                        min="0" max="100000" />
+                                    <label for="webrtc-low-qp-text">Low QP Threshold</label>
+                                    <input type="number" class="form-control" id="webrtc-low-qp-text" value="0" min="0"
+                                        max="999" />
+                                    <label for="webrtc-high-qp-text">High QP Threshold</label>
+                                    <input type="number" class="form-control" id="webrtc-high-qp-text" value="0" min="0"
+                                        max="999" />
+                                </div>
+                                <input id="webrtc-params-submit" class="btn btn-primary btn-lg mt-3" type="button"
+                                    value="Apply">
+                            </div>
+                        </section>
+                        <br>
+
+                        <div id="showFPS">
+                            <div class="settings-text">Show FPS</div>
+                            <label class="btn-overlay">
+                                <input type="button" id="show-fps-button" class="overlay-button btn-flat"
+                                    value="Toggle">
+                            </label>
+                        </div>
+                        <div id="matchViewportResolution">
+                            <div class="settings-text">Match Viewport Resolution</div>
+                            <label class="tgl-switch">
+                                <input type="checkbox" id="match-viewport-res-tgl" class="tgl tgl-flat">
+                                <div class="tgl-slider"></div>
+                            </label>
+                        </div>
+
+                        <div id="statsPanel">
+                            <div class="settings-text">Show Stats</div>
+                            <label class="tgl-switch">
+                                <input type="checkbox" id="show-stats-tgl" class="tgl tgl-flat" checked>
+                                <div class="tgl-slider"></div>
+                            </label>
+                            <div id="statsContainer" class="statsContainer">
+                                <div id="stats" class="stats"></div>
+                            </div>
+                            <br>
+                        </div>
+
+                        <div id="latencyTest">
+                            <div class="settings-text">Latency Stats</div>
+                            <label class="btn-overlay">
+                                <input type="button" id="test-latency-button" class="overlay-button btn-flat"
+                                    value="Test Latency">
+                            </label>
+                            <div id="latencyStatsContainer" class="statsContainer">
+                                <div id=LatencyStats class="stats">No stats yet...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- start sidebar -->
+        <div class="sidebar">
+            <div class="top_navbar1">
+                <div class="hamburger1">
+                    <button><i class="fa-solid fa-xmark"></i></button>
+                </div>
+            </div>
+            <div class="menu">
+                <!-- start search -->
+                <form class="search ">
+                    <input type="search" id="search" placeholder="Search">
+                    <button><svg width="20" height="20" viewBox="0 0 20 20">
+                            <circle fill="none" stroke="" stroke-width="3" cx="9" cy="9" r="7"></circle>
+                            <path fill="none" stroke="" stroke-width="3" d="M14,14 L25,25 L16,16 Z"></path>
+                        </svg></button>
+                </form>
+                <!-- end search -->
+
+                <!-- start tags -->
+                <div class="tags" id="tags">
+                    <div class="title">
+                        <span>Tags</span>
+                        <div class="number-close">
+                            <span class="number">1</span>
+                            <span id="angle-down" class="close-tags " onclick="openmenu()"><i
+                                    class="fa-solid fa-angle-down"></i></span>
+                            <span id="angle-up" class="close-tags angle-up" onclick="closemenu()"><i
+                                    class="fa-solid fa-angle-up"></i></span>
+                        </div>
+                    </div>
+                    <div class="hash-tag">
+                        <p>Hash Tag</p>
+                        <div class="content-tag">
+
+                            {{filters}}
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end tags -->
+
+                <!-- start menu-list -->
+                <ul class="menu-list" id="characters_list">
+                    {{characters_left_menu}}
+                </ul>
+                <!-- end menu-list -->
+            </div>
+
+        </div>
+        <!-- end sidebar -->
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script>
+        // search function
+        $('#search').keyup(function (s) {
+            var input = $(this).val().toUpperCase();
+            var elements = $('.search_element');
+            for (var i = 0; i < elements.length; i++) {
+                var data = elements[i].textContent.toUpperCase();
+                if (data.indexOf(input) > -1) {
+                    $(elements[i]).parent().parent().show();
+                } else {
+                    $(elements[i]).parent().parent().hide();
+                }
+            }
+        });
+        // Send data to emulator function
+        $(document).on("click", ".character", function (e) {
+            let descriptor = {
+                Category: $(this).attr('category'),
+                Item: $(this).attr('item')
+            };
+            console.log(descriptor);
+            emitUIInteraction(descriptor);
+        })
+
+
+        $(document).ready(function () {
+
+
+
+
+
+            // tags functions
+            $(document).on("click", ".filterCheckbox", function () {
+                var tags = $('.filterCheckbox:checked');
+                var tags_Array = [];
+
+                // creat an arry of tags ids thats checked
+                $.each(tags, function (index, tag) {
+                    tags_Array.push($(tag).val())
+                });
+
+
+                console.log(tags_Array)
+
+
+
+
+
+                var character_tags = $('.character_tags');
+                $.each(character_tags, function (index, value) {
+
+                    var data = JSON.parse($(value).attr('json_tags'));
+
+                    if (!$.isEmptyObject(data)) {
+
+                        var json_tag = JSON.parse(data)
+                        console.log(json_tag)
+
+                        $.each(json_tag, function (key, tag) {
+
+                            if ($.inArray(tag, tags_Array) !== -1) {
+                                $(value).removeClass('hidden')
+                            } else {
+                                $(value).addClass('hidden')
+                            }
+                        })
+                    }
+
+                    if ($.isEmptyObject(tags_Array)) {
+                        console.log(tags_Array)
+
+                        $.each(character_tags, function (index, value) {
+
+                            $(value).removeClass('hidden')
+
+                        })
+                    }
+                });
+            });
+        });
+
+
+        /****************************************  comunication from unrealengen  to web page **********************************/
+       
+        // add event listener  to listn for comming data
+        addResponseEventListener("characters_options", charactersChange);
+       
+        // function for sending to php server  role - data 
+        function charactersChange(data) {
+           // console.log(data)
+
+           $.ajax({
+            type: "POST",
+            url: 'submit.php',// php script page thats handle  request data
+            data:{
+                table_id : table_id,
+                role:'',
+                Action:'Get_characters_by_role',
+            },
+            cache:false,
+            success: function(RES){
+                  
+                $('#characters_list').html(RES)
+
+            }
+
+        })
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>
